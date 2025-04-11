@@ -7,7 +7,7 @@ class AppColors {
   static const Color darkTextOff = Color(0xFF5F6062);
   static const Color darkFade = Color(0xFF2c2d30);
   static const Color darkButton = Color(0xFFE27D19);
-  static const Color darkIcon = Color(0xFF616161);
+  static const Color darkIcon = Colors.white;
 
   // Light Theme Colors (placeholder - customize as needed)
   static const Color lightBackground = Colors.white;
@@ -15,7 +15,7 @@ class AppColors {
   static const Color lightTextOff = Color(0xFF9E9E9E);
   static const Color lightFade = Color(0xFFF5F5F5);
   static const Color lightButton = Color(0xFFE27D19);
-  static const Color lightIcon = Color(0xFF616161);
+  static const Color lightIcon = Colors.black;
 }
 
 class AppTextStyles {
@@ -23,8 +23,8 @@ class AppTextStyles {
 
   // Dark TextStyles
   static TextStyle heading(double width, {bool isDark = true}) => TextStyle(
-    fontSize: _scale(width, 24),
-    fontWeight: FontWeight.bold,
+    fontSize: _scale(width, 36),
+    fontWeight: FontWeight.w700,
     fontFamily: 'LibreBaskerville',
     color: isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary,
   );
@@ -38,7 +38,7 @@ class AppTextStyles {
   static TextStyle cookTime(double width, {bool isDark = true}) => TextStyle(
     fontSize: _scale(width, 12),
     fontFamily: 'Inter',
-    color: isDark ? AppColors.darkTextOff : AppColors.lightTextOff,
+    color: isDark ? AppColors.lightFade : AppColors.lightTextPrimary,
   );
 
   static TextStyle ingredientsTitle(double width, {bool isDark = true}) => TextStyle(
@@ -52,6 +52,37 @@ class AppTextStyles {
     fontSize: _scale(width, 12),
     fontFamily: 'Inter',
     color: isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary,
+  );
+
+  static TextStyle cardText(double width, {bool isDark = true}) => TextStyle(
+    fontSize: _scale(width, 25),
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Inter',
+    color: isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary,
+  );
+  static TextStyle cardDes(double width, {bool isDark = true}) => TextStyle(
+    fontSize: _scale(width, 27),
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Inter',
+    color: isDark ? AppColors.darkTextPrimary : AppColors.darkTextPrimary,
+  );
+  static TextStyle cardBy(double width, {bool isDark = true}) => TextStyle(
+    fontSize: _scale(width, 16),
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Inter',
+    color: isDark ? AppColors.darkTextPrimary : AppColors.darkTextPrimary,
+  );
+  static TextStyle reco(double width, {bool isDark = true}) => TextStyle(
+    fontSize: _scale(width, 20),
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Inter',
+    color: isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary,
+  );
+  static TextStyle selec(double width, {bool isDark = true,bool selected = true}) => TextStyle(
+    fontSize: _scale(width, 20),
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Inter',
+    color: selected ? AppColors.darkButton : AppColors.darkTextOff,
   );
 }
 

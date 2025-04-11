@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kitchen/data/models/recipe_data.dart';
 import '../../features/details/screens/details_screen.dart';
-import '../../features/home/data/recipe_data.dart';
 import '../../features/home/screens/home_screen.dart';
 
 
@@ -16,7 +16,7 @@ class AppRouter {
       case detailRoute:
         final recipe = settings.arguments as Recipe;
         return MaterialPageRoute(
-          builder: (_) => RecipeDetailScreen(recipe: recipe),
+          builder: (_) => RecipeDetailsScreen(recipe: recipe),
         );
 
       default:

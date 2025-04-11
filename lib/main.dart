@@ -46,9 +46,8 @@ class MyApp extends StatelessWidget {
       builder: (context, themeNotifier, child) {
         return MaterialApp(
           title: 'Recipe App',
-          theme: AppTheme.getTheme(context, isDarkMode: false),
-          darkTheme: AppTheme.getTheme(context, isDarkMode: true),
-          themeMode: themeNotifier.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          theme: AppTheme.getTheme(context, isDarkMode: true), // For light mode
+          darkTheme: AppTheme.getTheme(context, isDarkMode: true), // For dark mode
           initialRoute: '/',
           onGenerateRoute: AppRouter.generateRoute,
           debugShowCheckedModeBanner: false,

@@ -1,6 +1,10 @@
+// 🏠 Home Screen with unified data usage
 import 'package:flutter/material.dart';
-import '../../../core/constants/colors.dart';
-import '../../../core/constants/text_style.dart';
+import 'package:kitchen/data/models/recipe_data.dart';
+import 'package:kitchen/core/theme/theme.dart';
+import '../../../data/models/recipe_data.dart';
+import '../widgets/recipe_card.dart';
+import '../widgets/favorite_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,77 +14,121 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<String> categories = ['كيك', 'عيش', 'حلو', 'حادق'];
-  String selectedCategory = 'حادق';
+  bool isDarkMode = true;
+  int selectedIndex = 0;
+  final List<String> categories = ['الكل', 'الفطار', 'الغداء', 'العشاء', 'سناكس'];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // العنوان وأيقونة الشبكة
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.grid_view_rounded),
-                    color: AppColors.iconColor,
-                    iconSize: 26,
-                  ),
-                  Text(
-                    "وصفات",
-                    style: AppTextStyles.cardTitle,
-                  ),
-                ],
-              ),
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
 
-              const SizedBox(height: 20),
-
-              // قائمة التصنيفات الرأسية المدورة
-              Row(
+    return SafeArea(
+      child: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Theme(
+          data: AppTheme.getTheme(context, isDarkMode: isDarkMode),
+          child: Scaffold(
+            backgroundColor: isDarkMode ? AppColors.darkBackground : AppColors.lightBackground,
+            body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: width * 0.04),
+              child: ListView(
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: categories.reversed.map((category) {
-                      final isSelected = category == selectedCategory;
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: RotatedBox(
-                          quarterTurns: -1,
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                selectedCategory = category;
-                              });
-                            },
-                            child: Text(
-                              category,
-                              style: AppTextStyles.cardTitle.copyWith(
-                                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                                color: isSelected
-                                    ? AppColors.textPrimary
-                                    : AppColors.textOff,
+                  SizedBox(height: height * 0.03),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(onPressed: () {}, icon: Icon(Icons.grid_view)),
+                      IconButton(
+                        icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
+                        color: isDarkMode ? Colors.white : Colors.black,
+                        onPressed: () => setState(() => isDarkMode = !isDarkMode),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: height * 0.02),
+                  Text('الوصفات', style: AppTextStyles.heading(width, isDark: isDarkMode)),
+                  SizedBox(height: height * 0.015),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(categories.length, (index) {
+                        final selected = index == selectedIndex;
+                        return Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () => setState(() => selectedIndex = index),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: height * 0.005),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      categories[index],
+                                      style: AppTextStyles.selec(width, isDark: isDarkMode, selected: selected),
+                                    ),
+                                    if (selected)
+                                      Container(
+                                        margin: EdgeInsets.only(top: height * 0.007),
+                                        height: 2,
+                                        width: width * 0.06,
+                                        color: AppColors.darkButton,
+                                      ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      );
-                    }).toList(),
+                            SizedBox(width: width * 0.08),
+                          ],
+                        );
+                      }),
+                    ),
                   ),
-                  Row(
-                    children: [
-
-                    ],
-                  )
+                  SizedBox(height: height * 0.02),
+                  SizedBox(
+                    height: height * 277 / 812,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: recipes.length,
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.02),
+                      separatorBuilder: (_, __) => SizedBox(width: width * 0.04),
+                      itemBuilder: (_, index) => GestureDetector(
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          '/detail',
+                          arguments: recipes[index],
+                        ),
+                        child: RecipeCard(
+                          recipe: recipes[index],
+                          isDark: isDarkMode,
+                          width: width,
+                          height: height,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: height * 0.03),
+                  Text('التفضيلات', style: AppTextStyles.reco(width, isDark: isDarkMode)),
+                  SizedBox(height: height * 0.015),
+                  SizedBox(
+                    height: height * 187 / 812,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.02),
+                      itemCount: recipes.length,
+                      separatorBuilder: (_, __) => SizedBox(width: width * 0.04),
+                      itemBuilder: (context, index) => FavoriteCard(
+                        recipe: recipes[index],
+                        width: width,
+                        isDark: isDarkMode,
+                        onTap: () => Navigator.pushNamed(context, '/detail', arguments: recipes[index]), height: height,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: height * 0.04),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),
