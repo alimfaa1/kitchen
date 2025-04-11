@@ -8,6 +8,7 @@ class Recipe {
   final String cookTime;
   final String totalTime;
   final List<String> ingredients;
+  final List<String> steps;
   final String author;
 
   const Recipe({
@@ -18,6 +19,7 @@ class Recipe {
     required this.cookTime,
     required this.totalTime,
     required this.ingredients,
+    required this.steps,
     required this.author,
   });
 }
@@ -37,6 +39,13 @@ final List<Recipe> recipes = [
       'خس وطماطم وبصل',
       'رشة ملح وفلفل أسود',
     ],
+    steps: [
+      'سخن المقلاة على نار متوسطة.',
+      'ضع البرجر في المقلاة واطهه 5 دقائق لكل جانب.',
+      'قم بتسخين الخبز ثم أضف الخس والطماطم.',
+      'ضع اللحم في الخبز مع صوص الجبنة.',
+    ],
+
     author: 'Ali Ahmed',
   ),
   Recipe(
@@ -52,6 +61,12 @@ final List<Recipe> recipes = [
       'خبز برجر',
       'خس وطماطم وبصل',
       'رشة ملح وفلفل أسود',
+    ],
+    steps: [
+      'سخن المقلاة على نار متوسطة.',
+      'ضع البرجر في المقلاة واطهه 5 دقائق لكل جانب.',
+      'قم بتسخين الخبز ثم أضف الخس والطماطم.',
+      'ضع اللحم في الخبز مع صوص الجبنة.',
     ],
     author: 'Ali Ahmed',
   ),
@@ -72,6 +87,12 @@ final List<Recipe> recipes = [
       'خس وطماطم وبصل',
       'خس وطماطم وبصل',
       'خس وطماطم وبصل',
+    ],
+    steps: [
+      'سخن المقلاة على نار متوسطة.',
+      'ضع البرجر في المقلاة واطهه 5 دقائق لكل جانب.',
+      'قم بتسخين الخبز ثم أضف الخس والطماطم.',
+      'ضع اللحم في الخبز مع صوص الجبنة.',
     ],
     author: 'Ali Ahmed',
   ),

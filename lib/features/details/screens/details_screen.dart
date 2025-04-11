@@ -133,7 +133,13 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
                             recipe.description,
                             style: AppTextStyles.description(width, isDark: isDarkMode),
                           ),
+                          SizedBox(height: height * 0.01),
+
                           if (showDetails) ...[
+                            Divider(
+                              thickness: 0.7,
+                              color: Colors.grey,
+                            ),
                             SizedBox(height: height * 0.03),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -142,6 +148,11 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
                                 _buildTimeInfo('🔥 الطهي', recipe.cookTime, width, isDarkMode),
                                 _buildTimeInfo('⏱ الكلي', recipe.totalTime, width, isDarkMode),
                               ],
+                            ),
+                            SizedBox(height: height * 0.03),
+                            Divider(
+                              thickness: 0.7,
+                              color: Colors.grey,
                             ),
                             SizedBox(height: height * 0.03),
                             Text(
@@ -153,6 +164,21 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
                               padding: const EdgeInsets.symmetric(vertical: 4.0),
                               child: Text(
                                 '• $ingredient',
+                                style: AppTextStyles.ingredientsText(width, isDark: isDarkMode),
+                              ),
+                            )),
+
+                            SizedBox(height: height * 0.03),
+
+                            Text(
+                              'الخطوات',
+                              style: AppTextStyles.ingredientsTitle(width, isDark: isDarkMode),
+                            ),
+                            SizedBox(height: height * 0.015),
+                            ...?recipe.steps?.asMap().entries.map((entry) => Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 6.0),
+                              child: Text(
+                                '${entry.key + 1}. ${entry.value}',
                                 style: AppTextStyles.ingredientsText(width, isDark: isDarkMode),
                               ),
                             )),
