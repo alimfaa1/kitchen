@@ -1,7 +1,7 @@
 // ✅ Favorite Card using Recipe model from correct path
 import 'package:flutter/material.dart';
 import 'package:kitchen/core/theme/theme.dart';
-import 'package:kitchen/data/models/recipe_data.dart';
+import 'package:kitchen/data/local/recipe_data.dart';
 
 class FavoriteCard extends StatelessWidget {
   final Recipe recipe;

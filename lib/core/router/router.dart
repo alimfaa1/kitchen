@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kitchen/data/models/recipe_data.dart';
+import 'package:kitchen/data/local/recipe_data.dart';
 import '../../features/details/screens/details_screen.dart';
 import '../../features/home/screens/home_screen.dart';
 

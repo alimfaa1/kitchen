@@ -1,8 +1,8 @@
 // 🏠 Home Screen with unified data usage
 import 'package:flutter/material.dart';
-import 'package:kitchen/data/models/recipe_data.dart';
+import 'package:kitchen/data/local/recipe_data.dart';
 import 'package:kitchen/core/theme/theme.dart';
-import '../../../data/models/recipe_data.dart';
+import '../../../data/local/recipe_data.dart';
 import '../widgets/recipe_card.dart';
 import '../widgets/favorite_card.dart';
 
